@@ -1,0 +1,32 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Shops
+    = csrf_meta_tags
+    %link{href: "#{APP_CONFIG['cdnurl']}css/lib/reboot.css", media: 'all', data:{turbolinks:{track: true}}, rel: 'stylesheet'}
+    %link{href: "#{APP_CONFIG['cdnurl']}css/all.min.css", media: 'all', data:{turbolinks:{track: true}}, rel: 'stylesheet'}
+  %body{:class => "#{params[:controller]} #{params[:controller]}_#{params[:action]}"}
+    %nav.navbar.navbar-expand-md.navbar-dark.fixed-top.bg-dark
+      %a.navbar-brand{:href => "/"} Shops
+      .collapse.navbar-collapse
+        %ul.navbar-nav.mr-auto
+          %li.nav-item
+            %a.nav-link(href="/") Nearby Shops
+          %li.nav-item
+            %a.nav-link(href="/favorites") My preferred Shops
+      %ul.navbar-nav.px-3
+        %li.nav-item.text-nowrap
+          - if user_signed_in?
+            %a.nav-link{:href => "/logout"} Sign out
+          - else
+            %a.nav-link{:href => "/login"} Sign in
+    .container
+      %main(role="main" style="margin-top:10%")
+        - flash.each do |key, value|
+          %div{class: "alert alert-success", role: 'alert'}
+            = value
+            %button.close{type: "button", data: {dismiss: "alert"}, aria: {label: "Close"}}
+              %span{aria: {hidden: "true"}} &times;
+        = yield
+    %script{type: "text/javascript", src: "#{APP_CONFIG['cdnurl']}js/all.min.js", data:{turbolinks:{track: true}}}

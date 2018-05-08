@@ -1,0 +1,4 @@
+development:
+  baseurl: "http://localhost:3000/"
+  cdnurl: "http://localhost:3000/assets/"
+  secret: "6ac8cfa48afd71a6df80f26790048e692f2c9140"
